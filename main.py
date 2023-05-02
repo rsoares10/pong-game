@@ -1,6 +1,7 @@
 from turtle import Screen, Turtle
+import time
 
-from src import Paddle
+from src import Ball, Paddle
 
 
 def screen_builder():
@@ -17,6 +18,7 @@ def main():
     screen = screen_builder()
     r_paddle = Paddle(start_pos=(350, 0))
     l_paddle = Paddle(start_pos=(-350, 0))
+    ball = Ball()
 
     # Build screen listeners
     screen.listen()
@@ -28,6 +30,8 @@ def main():
     # Game main loop
     game_is_on = True
     while game_is_on:
+        time.sleep(0.1)
+        ball.move()
         screen.update()
 
     # Close the game when screen detects a mouse click
