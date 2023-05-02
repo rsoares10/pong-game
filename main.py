@@ -31,8 +31,11 @@ def main():
     game_is_on = True
     while game_is_on:
         time.sleep(0.1)
-        ball.move()
         screen.update()
+
+        ball.move()
+        if ball.ycor() > 280 or ball.ycor() < -280:
+            ball.bounce()
 
     # Close the game when screen detects a mouse click
     # TODO: set up a proper close options
