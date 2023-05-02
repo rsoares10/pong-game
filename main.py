@@ -1,5 +1,5 @@
-from turtle import Screen, Turtle
 import time
+from turtle import Screen, Turtle
 
 from src import Ball, Paddle
 
@@ -34,8 +34,15 @@ def main():
         screen.update()
 
         ball.move()
+        # Detect collision with wall (vertical collision)
         if ball.ycor() > 280 or ball.ycor() < -280:
-            ball.bounce()
+            ball.y_bounce()
+
+        # Detect collision with paddles (horizontal collision)
+        r_paddle_collision = ball.distance(r_paddle) < 50 and ball.xcor() > 320
+        l_paddle_collision = ball.distance(l_paddle) < 50 and ball.xcor() < -320
+        if r_paddle_collision or l_paddle_collision:
+            ball.x_bounce()
 
     # Close the game when screen detects a mouse click
     # TODO: set up a proper close options
