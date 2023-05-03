@@ -31,7 +31,7 @@ def main():
     # Game main loop
     game_is_on = True
     while game_is_on:
-        time.sleep(0.1)
+        time.sleep(ball.move_speed)
         screen.update()
 
         ball.move()
@@ -44,14 +44,17 @@ def main():
         l_paddle_collision = ball.distance(l_paddle) < 50 and ball.xcor() < -320
         if r_paddle_collision or l_paddle_collision:
             ball.x_bounce()
+            ball.increase_move_speed()
 
         # Detects when paddle misses a ball (horizontal collision)
         if ball.xcor() > 390:
             ball.reset_position()
+            ball.reset_move_speed()
             scoreboard.l_point()
             scoreboard.update_scoreboard()
         if ball.xcor() < -390:
             ball.reset_position()
+            ball.reset_move_speed()
             scoreboard.r_point()
             scoreboard.update_scoreboard()
 
