@@ -44,6 +44,12 @@ def main():
         if r_paddle_collision or l_paddle_collision:
             ball.x_bounce()
 
+        # Detects when paddle misses a ball (horizontal collision)
+        if ball.xcor() > 390:
+            ball.reset_position()
+        if ball.xcor() < -390:
+            ball.reset_position()
+
     # Close the game when screen detects a mouse click
     # TODO: set up a proper close options
     screen.exitonclick()
