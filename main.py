@@ -1,7 +1,7 @@
 import time
 from turtle import Screen, Turtle
 
-from src import Ball, Paddle
+from src import Ball, Paddle, Scoreboard
 
 
 def screen_builder():
@@ -16,6 +16,7 @@ def screen_builder():
 def main():
     # Instantiate game objects
     screen = screen_builder()
+    scoreboard = Scoreboard()
     r_paddle = Paddle(start_pos=(350, 0))
     l_paddle = Paddle(start_pos=(-350, 0))
     ball = Ball()
@@ -47,8 +48,12 @@ def main():
         # Detects when paddle misses a ball (horizontal collision)
         if ball.xcor() > 390:
             ball.reset_position()
+            scoreboard.l_point()
+            scoreboard.update_scoreboard()
         if ball.xcor() < -390:
             ball.reset_position()
+            scoreboard.r_point()
+            scoreboard.update_scoreboard()
 
     # Close the game when screen detects a mouse click
     # TODO: set up a proper close options
