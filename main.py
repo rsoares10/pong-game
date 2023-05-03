@@ -13,6 +13,13 @@ def screen_builder():
     return s
 
 
+def update_game_status(update_scoreboard, increase_score, ball):
+    ball.reset_position()
+    ball.reset_move_speed()
+    increase_score()
+    update_scoreboard()
+
+
 def main():
     # Instantiate game objects
     screen = screen_builder()
@@ -35,6 +42,7 @@ def main():
         screen.update()
 
         ball.move()
+
         # Detect collision with wall (vertical collision)
         if ball.ycor() > 280 or ball.ycor() < -280:
             ball.y_bounce()
@@ -48,18 +56,11 @@ def main():
 
         # Detects when paddle misses a ball (horizontal collision)
         if ball.xcor() > 390:
-            ball.reset_position()
-            ball.reset_move_speed()
-            scoreboard.l_point()
-            scoreboard.update_scoreboard()
+            update_game_status(scoreboard.update_scoreboard, scoreboard.l_point, ball)
         if ball.xcor() < -390:
-            ball.reset_position()
-            ball.reset_move_speed()
-            scoreboard.r_point()
-            scoreboard.update_scoreboard()
+            update_game_status(scoreboard.update_scoreboard, scoreboard.r_point, ball)
 
-    # Close the game when screen detects a mouse click
-    # TODO: set up a proper close options
+    # TODO: Implement a proper close options
     screen.exitonclick()
 
 
